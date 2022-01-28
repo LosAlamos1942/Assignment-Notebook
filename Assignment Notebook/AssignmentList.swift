@@ -2,7 +2,7 @@
 //  AssignmentList.swift
 //  Assignment Notebook
 //
-//  Created by Student on 1/24/22.
+//  Created by Student on 1/20/22.
 //
 
 import Foundation
@@ -43,4 +43,3 @@ class AssignmentList: ObservableObject {
 
         }
 }
-

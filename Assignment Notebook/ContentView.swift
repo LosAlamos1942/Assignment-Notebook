@@ -2,11 +2,11 @@
 //  ContentView.swift
 //  Assignment Notebook
 //
-//  Created by Student on 1/24/22.
+//  Created by Student on 1/11/22.
 //
 
 import SwiftUI
- 
+
 struct ContentView: View {
     @ObservedObject var assignmentList = AssignmentList()
     @State private var showingAddItemView = false
@@ -31,10 +31,15 @@ struct ContentView: View {
                 .onDelete(perform: { indexSet in
                     assignmentList.items.remove(atOffsets: indexSet)
                 })
-        
             }
+            .sheet(isPresented: $showingAddItemView, content: {
+                AddAssignmentView(assignmentList: assignmentList)
+            })
+            
             .navigationBarTitle("Courses", displayMode: .inline)
-            .navigationBarItems(leading: EditButton())
+            .navigationBarItems(leading: EditButton(), trailing: Button(action: { showingAddItemView = true}) {
+                Image(systemName: "plus")
+            })
         }
     }
 }
@@ -43,11 +48,10 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
- 
+
 struct AssignmentItem: Identifiable, Codable {
     var id = UUID()
     var course = String()
     var description = String()
     var dueDate = Date()
 }
-
